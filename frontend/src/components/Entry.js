@@ -35,6 +35,11 @@ class Entry extends Component{
                                            placeholder="Enter username"/>
                                 </div>
                                 <div className="form-group">
+                                    <label htmlFor="register-email">Email</label>
+                                    <input type="email" className="form-control" id="register-email"
+                                           placeholder="Enter email"/>
+                                </div>
+                                <div className="form-group">
                                     <label htmlFor="register-password">Password</label>
                                     <input type="password" className="form-control" id="register-password"
                                            placeholder="Enter password"/>
