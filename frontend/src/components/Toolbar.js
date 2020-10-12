@@ -13,4 +13,4 @@ class Toolbar extends Component{
 
 }
 
-export default Toolbar
+export default Toolbar;

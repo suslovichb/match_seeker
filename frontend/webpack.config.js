@@ -1,4 +1,7 @@
+require('babel-polyfill');
+
 module.exports = {
+  entry: ['babel-polyfill', './src/index.js'],
   module: {
     rules: [
       {
@@ -13,5 +16,6 @@ module.exports = {
         use: ['style-loader', 'css-loader']
       },
     ]
-  }
+  },
+
 };

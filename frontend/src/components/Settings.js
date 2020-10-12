@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Settings extends Component{
     render(){
         return(
-            <div id={'settings-component'}>
+            <div id='settings'>
                 <div id="settings-bar" className="navbar navbar-expand-lg navbar-dark bg-dark">
                     <span className="input-group-wrapper">
                         <label htmlFor="initial-table-input">Initial table:</label>
@@ -11,8 +11,13 @@ class Settings extends Component{
                     </span>
                     <span className="input-group-wrapper">
                         <label htmlFor="catalog-table-input">Catalog table:</label>
-                        <input type="file" id="catalog-table-input" placeholder="Catalog table"/>
+                        <input type="text" id="catalog-table-input" placeholder="Catalog table"/>
                     </span>
+                    <span className="input-group-wrapper">
+                        <label htmlFor="synonyms-table-input">Synonyms table:</label>
+                        <input type="text" id="synonyms-table-input" placeholder="Synonyms table"/>
+                    </span>
+                    <button type="button" className="btn btn-info">Load settings</button>
                 </div>
             </div>
         )
@@ -20,4 +25,4 @@ class Settings extends Component{
 
 }
 
-export default Settings
+export default Settings;

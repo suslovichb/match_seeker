@@ -3,14 +3,16 @@ import React, { Component } from 'react';
 class Table extends Component{
     render(){
         return(
-            <div id={'table-component'}>
+            <div id={'results-table'}>
                 <div className="table-container">
                     <table className="table">
-                        <tr className="table-info">
-                            <th>Initial</th>
-                            <th>Selection</th>
-                            <th>Synonyms</th>
-                        </tr>
+                        <thead>
+                            <tr className="table-info">
+                                <th>Initial</th>
+                                <th>Selection</th>
+                                <th>Synonyms</th>
+                            </tr>
+                        </thead>
                     </table>
                 </div>
             </div>
@@ -19,4 +21,4 @@ class Table extends Component{
 
 }
 
-export default Table
+export default Table;
