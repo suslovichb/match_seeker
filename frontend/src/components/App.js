@@ -34,15 +34,7 @@ class App extends Component{
     render(){
         return(
             <div id='app'>
-                <Header />
-
-                <button onClick={this.handleLogout}>Logout</button>
-
-                <nav>
-                    <Link className={"nav-link"} to={"/"}>Home</Link>
-                    <Link className={"nav-link"} to={"/entry/"}>Entry</Link>
-                    <Link className={"nav-link"} to={"/workplace/"}>Workplace</Link>
-                </nav>
+                <Header handleLogout={this.handleLogout}/>
 
                 <Switch>
                     <Route exact path={"/entry/"} component={Entry}/>

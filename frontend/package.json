@@ -27,6 +27,7 @@
   "dependencies": {
     "axios": "^0.20.0",
     "core-js": "^3.6.5",
+    "jwt-decode": "^3.0.0",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.7"
