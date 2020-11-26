@@ -1,19 +1,17 @@
-import React, { Component } from 'react';
-import Settings from "./Settings";
-import Table from "./Table";
+import React from 'react';
 import Toolbar from "./Toolbar";
+import SettingsContainer from "./SettingsContainer";
+import TableContainer from "./TableContainer";
 
-class Workplace extends Component{
-    render(){
-        return(
-            <div id='home'>
-                <Settings/>
-                <Toolbar />
-                <Table />
-            </div>
-        )
-    }
 
-}
+const Workplace = ({ setInitialDoc, loadLookupDoc, loadSynonymsDoc }) => {
+    return (
+        <div id='workplace'>
+            <SettingsContainer {...{setInitialDoc, loadLookupDoc, loadSynonymsDoc}}/>
+            <Toolbar />
+            <TableContainer />
+        </div>
+    )
+};
 
 export default Workplace;

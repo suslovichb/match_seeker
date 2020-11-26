@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import Entry from "./Entry";
-import Header from "./Header";
-import Workplace from "./Workplace";
-import {Switch, Route, Link} from "react-router-dom";
+import {Switch, Route} from "react-router-dom";
 import axiosInstance from "../axiosApi";
+import EntryContainer from "./EntryContainer";
+import StatusbarContainer from "./StatusbarContainer";
+import HeaderContainer from "./HeaderContainer";
+import WorkplaceContainer from "./WorkplaceContainer";
+
 
 class App extends Component{
     constructor(props){
@@ -34,13 +36,14 @@ class App extends Component{
     render(){
         return(
             <div id='app'>
-                <Header handleLogout={this.handleLogout}/>
-
+                <HeaderContainer handleLogout={this.handleLogout}/>
                 <Switch>
-                    <Route exact path={"/entry/"} component={Entry}/>
-                    <Route exact path={"/workplace/"} component={Workplace}/>
-                    <Route exact path={"/"} component={Workplace}/>
+                    <Route exact path={"/entry/"} component={EntryContainer}/>
+                    <Route exact path={"/workplace/"} component={WorkplaceContainer}/>
+                    <Route exact path={"/"} component={WorkplaceContainer}/>
                 </Switch>
+
+                <StatusbarContainer />
             </div>
         )
     }
