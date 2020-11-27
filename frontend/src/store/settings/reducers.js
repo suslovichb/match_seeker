@@ -3,11 +3,13 @@ import {
     SETTINGS_SET_LOOKUP_DOC_EMAIL,
     SETTINGS_SET_LOOKUP_DOC_KEY,
     SETTINGS_SET_LOOKUP_DOC_SHEET_ID,
+    SETTINGS_SET_LOOKUP_DOC_COLUMN,
     SETTINGS_SET_LOOKUP_DOC_IS_LOADED,
     SETTINGS_SET_SYNONYMS_DOC_ID,
     SETTINGS_SET_SYNONYMS_DOC_EMAIL,
     SETTINGS_SET_SYNONYMS_DOC_KEY,
     SETTINGS_SET_SYNONYMS_DOC_SHEET_ID,
+    SETTINGS_SET_SYNONYMS_DOC_COLUMN,
     SETTINGS_SET_SYNONYMS_DOC_IS_LOADED,
 } from "./actions";
 
@@ -15,11 +17,13 @@ import {
 const initialState = {
     lookupDocId: '',
     lookupDocSheetId: '',
+    lookupDocColumn: '',
     lookupDocEmail: '',
     lookupDocKey: '',
     lookupDocIsLoaded: false,
     synonymsDocId: '',
     synonymsDocSheetId: '',
+    synonymsDocColumn: '',
     synonymsDocEmail: '',
     synonymsDocKey: '',
     synonymsDocIsLoaded: false,
@@ -35,6 +39,8 @@ export const settingsReducer = (state = initialState, action) => {
             return {...state, lookupDocKey: action.payload};
         case SETTINGS_SET_LOOKUP_DOC_SHEET_ID:
             return {...state, lookupDocSheetId: action.payload};
+        case SETTINGS_SET_LOOKUP_DOC_COLUMN:
+            return {...state, lookupDocColumn: action.payload};
         case SETTINGS_SET_LOOKUP_DOC_IS_LOADED:
             return {...state, lookupDocIsLoaded: action.payload};
         case SETTINGS_SET_SYNONYMS_DOC_ID:
@@ -45,6 +51,8 @@ export const settingsReducer = (state = initialState, action) => {
             return {...state, synonymsDocKey: action.payload};
         case SETTINGS_SET_SYNONYMS_DOC_SHEET_ID:
             return {...state, synonymsDocSheetId: action.payload};
+        case SETTINGS_SET_SYNONYMS_DOC_COLUMN:
+            return {...state, synonymsDocColumn: action.payload};
         case SETTINGS_SET_SYNONYMS_DOC_IS_LOADED:
             return {...state, synonymsDocIsLoaded: action.payload};
     }

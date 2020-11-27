@@ -10,10 +10,12 @@ const Settings = ({
     synonymsDocKey,
     onLookupDocIdChange,
     onLookupDocSheetIdChange,
+    onLookupDocColumnChange,
     onLookupDocEmailChange,
     onLookupDocKeyChange,
     onSynonymsDocIdChange,
     onSynonymsDocSheetIdChange,
+    onSynonymsDocColumnChange,
     onSynonymsDocEmailChange,
     onSynonymsDocKeyChange,
     onSynonymsDocChange,
@@ -21,7 +23,9 @@ const Settings = ({
     loadSettings,
     saveSettings,
     lookupDocSheetId,
+    lookupDocColumn,
     synonymsDocSheetId,
+    synonymsDocColumn,
     lookupDocIsLoaded,
     synonymsDocIsLoaded,
     loadLookupDoc,
@@ -35,9 +39,9 @@ const Settings = ({
         return (<span>&#10005;</span>)
     };
 
-    const arrayToOptions = (array) => {
-        return array.map((optionName, index) => {return <option value={optionName} key={index}>{optionName}</option>})
-    };
+    // const arrayToOptions = (array) => {
+    //     return array.map((optionName, index) => {return <option value={optionName} key={index}>{optionName}</option>})
+    // };
 
     return (
         <div id='settings'>
@@ -62,6 +66,8 @@ const Settings = ({
                            value={lookupDocId} onChange={onLookupDocIdChange}/>
                     <input type="text" id="lookup-doc-sheet-id" placeholder="Sheet ID"
                            value={lookupDocSheetId} onChange={onLookupDocSheetIdChange}/>
+                    <input type="text" id="lookup-doc-column" placeholder="Column"
+                           value={lookupDocColumn} onChange={onLookupDocColumnChange}/>
                     <input type="text" id="lookup-doc-email" placeholder="Email"
                            value={lookupDocEmail} onChange={onLookupDocEmailChange}/>
                     <input type="text" id="lookup-doc-key" placeholder="Key"
@@ -89,6 +95,8 @@ const Settings = ({
                            value={synonymsDocId} onChange={onSynonymsDocIdChange}/>
                     <input type="text" id="synonyms-doc-sheet-id" placeholder="Sheet ID"
                            value={synonymsDocSheetId} onChange={onSynonymsDocSheetIdChange}/>
+                    <input type="text" id="synonyms-doc-column" placeholder="Column"
+                           value={synonymsDocColumn} onChange={onSynonymsDocColumnChange}/>
                     <input type="text" id="synonyms-doc-email" placeholder="Email"
                            value={synonymsDocEmail} onChange={onSynonymsDocEmailChange}/>
                     <input type="text" id="synonyms-doc-key" placeholder="Key"

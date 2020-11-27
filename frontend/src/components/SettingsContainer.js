@@ -6,7 +6,7 @@ import {
     setLookupDocIsLoaded, setLookupDocKey,
     setLookupDocSheetId, setSynonymsDocSheetId,
     setSynonymsDocEmail, setSynonymsDocId,
-    setSynonymsDocKey, setSynonymsDocIsLoaded
+    setSynonymsDocKey, setSynonymsDocIsLoaded, setLookupDocColumn, setSynonymsDocColumn
 } from "../store/settings/actions";
 import XLSX from 'xlsx';
 
@@ -49,7 +49,8 @@ const mapStateToProps = (state, ownProps) => {
         synonymsDocSheetId: state.settings.synonymsDocSheetId,
         lookupDocIsLoaded: state.settings.lookupDocIsLoaded,
         synonymsDocIsLoaded: state.settings.synonymsDocIsLoaded,
-        lookupSheetColumns: [],
+        lookupDocColumn: state.settings.lookupDocColumn,
+        synonymsDocColumn: state.settings.synonymsDocColumn,
     };
 };
 
@@ -57,10 +58,12 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onLookupDocIdChange: (event) => { dispatch(setLookupDocId(event.target.value)) },
         onLookupDocSheetIdChange: (event) => { dispatch(setLookupDocSheetId(event.target.value)) },
+        onLookupDocColumnChange: (event) => { dispatch(setLookupDocColumn(event.target.value)) },
         onLookupDocEmailChange: (event) => { dispatch(setLookupDocEmail(event.target.value)) },
         onLookupDocKeyChange: (event) => { dispatch(setLookupDocKey(event.target.value)) },
         onSynonymsDocIdChange: (event) => { dispatch(setSynonymsDocId(event.target.value)) },
         onSynonymsDocSheetIdChange: (event) => { dispatch(setSynonymsDocSheetId(event.target.value)) },
+        onSynonymsDocColumnChange: (event) => { dispatch(setSynonymsDocColumn(event.target.value)) },
         onSynonymsDocEmailChange: (event) => { dispatch(setSynonymsDocEmail(event.target.value)) },
         onSynonymsDocKeyChange: (event) => { dispatch(setSynonymsDocKey(event.target.value)) },
         loadSettings: () => {console.log('load settings clicked')},
