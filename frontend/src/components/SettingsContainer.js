@@ -2,11 +2,18 @@ import React from 'react';
 import {connect} from "react-redux";
 import Settings from "./Settings";
 import {
-    setLookupDocEmail, setLookupDocId,
-    setLookupDocIsLoaded, setLookupDocKey,
-    setLookupDocSheetId, setSynonymsDocSheetId,
-    setSynonymsDocEmail, setSynonymsDocId,
-    setSynonymsDocKey, setSynonymsDocIsLoaded, setLookupDocColumn, setSynonymsDocColumn
+    setLookupDocEmail,
+    setLookupDocId,
+    setLookupDocKey,
+    setLookupDocSheetId,
+    setSynonymsDocSheetId,
+    setSynonymsDocEmail,
+    setSynonymsDocId,
+    setSynonymsDocKey,
+    setLookupDocColumn,
+    setSynonymsDocColumn,
+    setInitialDocSheetName,
+    setInitialDocColumn,
 } from "../store/settings/actions";
 import XLSX from 'xlsx';
 
@@ -23,34 +30,70 @@ async function getWorkbookFromFile(excelFile) {
     });
 }
 
-// const onInitialDocInputChange = (event) => {
-//     const file = event.target.files[0];
-//     const workbook = getWorkbookFromFile(file);
-//     return workbook;
-// };
-
 const mapStateToProps = (state, ownProps) => {
     return {
         lookupDocId: state.settings.lookupDocId,
         lookupDocEmail: state.settings.lookupDocEmail,
         lookupDocKey: state.settings.lookupDocKey,
+        lookupDocSheetId: state.settings.lookupDocSheetId,
+        lookupDocIsLoaded: state.settings.lookupDocIsLoaded,
+        lookupDocColumn: state.settings.lookupDocColumn,
+        lookupArrayIsLoaded: state.settings.lookupArrayIsLoaded,
+
         synonymsDocId: state.settings.synonymsDocId,
         synonymsDocEmail: state.settings.synonymsDocEmail,
         synonymsDocKey: state.settings.synonymsDocKey,
-        initialFile: ownProps.initialFile,
+        synonymsDocSheetId: state.settings.synonymsDocSheetId,
+        synonymsDocIsLoaded: state.settings.synonymsDocIsLoaded,
+        synonymsDocColumn: state.settings.synonymsDocColumn,
+        synonymsArrayIsLoaded: state.settings.synonymsArrayIsLoaded,
+
+        initialDocColumn: state.settings.initialDocColumn,
+        initialDocSheetName: state.settings.initialDocSheetName,
+        initialDocIsLoaded: state.settings.initialDocIsLoaded,
+        initialArrayIsLoaded: state.settings.initialArrayIsLoaded,
 
         onInitialDocInputChange: async (event) => {
             event.stopPropagation();
             event.preventDefault();
-            getWorkbookFromFile(event.target.files[0]).then(wb => {console.log(wb);});
+            getWorkbookFromFile(event.target.files[0]).then(wb => {
+                console.log(wb);
+                ownProps.setInitialDoc(wb);
+            });
         },
 
-        lookupDocSheetId: state.settings.lookupDocSheetId,
-        synonymsDocSheetId: state.settings.synonymsDocSheetId,
-        lookupDocIsLoaded: state.settings.lookupDocIsLoaded,
-        synonymsDocIsLoaded: state.settings.synonymsDocIsLoaded,
-        lookupDocColumn: state.settings.lookupDocColumn,
-        synonymsDocColumn: state.settings.synonymsDocColumn,
+        loadInitialArray: () => {
+            ownProps.loadInitialArray(
+                state.settings.initialDocSheetName,
+                state.settings.initialDocColumn,
+            );
+        },
+
+        loadLookupArray: () => {
+            try {
+                ownProps.loadLookupArray(
+                    state.settings.lookupDocId,
+                    state.settings.lookupDocEmail,
+                    state.settings.lookupDocKey,
+                    state.settings.lookupDocSheetId,
+                    state.settings.lookupDocColumn,
+                );
+            }
+            catch (e) { console.log(e); }
+        },
+
+        loadSynonymsDict: () => {
+            try {
+                ownProps.loadSynonymsDict(
+                    state.settings.synonymsDocId,
+                    state.settings.synonymsDocEmail,
+                    state.settings.synonymsDocKey,
+                    state.settings.synonymsDocSheetId,
+                    state.settings.synonymsDocColumn,
+                );
+            }
+            catch (e) { console.log(e); }
+        },
     };
 };
 
@@ -66,16 +109,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         onSynonymsDocColumnChange: (event) => { dispatch(setSynonymsDocColumn(event.target.value)) },
         onSynonymsDocEmailChange: (event) => { dispatch(setSynonymsDocEmail(event.target.value)) },
         onSynonymsDocKeyChange: (event) => { dispatch(setSynonymsDocKey(event.target.value)) },
+        onInitialDocColumnChange: (event) => { dispatch(setInitialDocColumn(event.target.value)) },
+        onInitialDocSheetNameChange: (event) => { dispatch(setInitialDocSheetName(event.target.value)) },
         loadSettings: () => {console.log('load settings clicked')},
         saveSettings: () => {console.log('save settings clicked')},
-        loadLookupDoc: () => {
-            try { ownProps.loadLookupDoc(); }
-            catch (e) { console.log(e); }
-        },
-        loadSynonymsDoc: () =>{
-            try { ownProps.loadSynonymsDoc(); }
-            catch (e) { console.log(e); }
-        },
 
     };
 };

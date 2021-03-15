@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
 const TableRow = (props) => {
@@ -8,16 +8,18 @@ const TableRow = (props) => {
             <td >{props.initialValue}</td>
             <td>
                 <select className='match-select'>
-                    <option>{props.firstOption}</option>
-                    <option>{props.secondOption}</option>
+                    {props.matches.map((match, index) => (<option key={index}>{match.target}</option>))}
                 </select>
             </td>
             <td>
-                <form>
-                    <input type='text' className='synonym-input'/>
-                    <button className='save-synonym-button'>Save</button>
-                </form>
+                {props.synonyms.join(', ') || ''}
             </td>
+            {/*<td>*/}
+                {/*<form>*/}
+                    {/*<input type='text' className='synonym-input'/>*/}
+                    {/*<button className='save-synonym-button'>Save</button>*/}
+                {/*</form>*/}
+            {/*</td>*/}
         </tr>
     )
 };

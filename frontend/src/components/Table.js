@@ -2,7 +2,7 @@ import React from 'react';
 import TableRow from "./TableRow";
 
 
-const Table = () => (
+const Table = ({lookupResults}) => (
     <div id="match-table-container">
         <div className="table-wrapper">
             <table className="table match-table">
@@ -15,6 +15,10 @@ const Table = () => (
                     </tr>
                 </thead>
                 <tbody>
+                    {
+                        lookupResults &&
+                        lookupResults.map((result, index) => (<TableRow key={index} {...result}/>))
+                    }
                 </tbody>
             </table>
         </div>

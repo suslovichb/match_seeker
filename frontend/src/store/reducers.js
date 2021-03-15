@@ -7,6 +7,7 @@ import {initialDocReducer} from "./initial_doc/reducers";
 import {lookupDocReducer} from "./lookup_doc/reducers";
 import {resultsTableReducer} from "./results_table/reducers";
 import {synonymsDocReducer} from "./synonyms_doc/reducers";
+import {workplaceReducer} from "./workplace/reducers";
 
 
 const rootReducer = combineReducers({
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
     initialDoc: initialDocReducer,
     lookupDoc: lookupDocReducer,
     synonymsDoc: synonymsDocReducer,
-    resultsDoc: resultsTableReducer
+    resultsDoc: resultsTableReducer,
+    // workplace: workplaceReducer
 });
 
 export default rootReducer;
