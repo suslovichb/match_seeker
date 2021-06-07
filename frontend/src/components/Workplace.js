@@ -1,7 +1,7 @@
 import React from 'react';
 import Toolbar from "./Toolbar";
 import SettingsContainer from "./SettingsContainer";
-import TableContainer from "./TableContainer";
+import MatchTable from "./MatchTable";
 
 
 const Workplace = ({
@@ -11,15 +11,22 @@ const Workplace = ({
     setInitialDoc,
     runSeeking,
     clearResults,
-    lookupResults
+    lookupResults,
+    updateLookupResults
 }) => {
     return (
         <div id='workplace'>
             <SettingsContainer {...{loadInitialArray, loadLookupArray, loadSynonymsDict, setInitialDoc}}/>
             <Toolbar {...{runSeeking, clearResults}}/>
-            <TableContainer {...{lookupResults}}/>
+            {
+                lookupResults &&
+                <MatchTable {...{
+                    data: lookupResults,
+                    updateTableData: updateLookupResults
+                }}/>
+            }
         </div>
-    )
+    );
 };
 
 export default Workplace;

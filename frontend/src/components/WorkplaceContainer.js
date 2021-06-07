@@ -6,6 +6,7 @@ import {findBestMatch} from 'string-similarity';
 import {
     setLookupArrayIsLoaded,
     setSynonymsArrayIsLoaded,
+    setSynonymsDictIsLoaded,
     setInitialArrayIsLoaded,
     setInitialDocIsLoaded,
 } from "../store/settings/actions";
@@ -51,13 +52,7 @@ const WorkplaceContainer = (props) => {
     const loadLookupArray = async (spreadsheetId, email, key, sheetId, column) => {
         let arr = await getGoogleSpreadsheetColumn(spreadsheetId, email, key, sheetId, column);
         setLookupArray(arr);
-        console.log(arr);
-    };
-
-    const loadSynonymsArray = async (spreadsheetId, email, key, sheetId, column) => {
-        let arr = await getGoogleSpreadsheetColumn(spreadsheetId, email, key, sheetId, column,);
-        setSynonymsArray(arr);
-        console.log(arr);
+        // console.log(arr);
     };
 
     const synonymsArrayLoadCheck = () => {
@@ -79,8 +74,15 @@ const WorkplaceContainer = (props) => {
         }
 
         setSynonymsDict(synonymsDict);
-        console.log(synonymsDict);
+        // console.log(synonymsDict);
     };
+
+    const synonymsDictLoadCheck = () => {
+        props.setSynonymsDictIsLoaded(!!synonymsDict);
+    };
+
+    useEffect(synonymsDictLoadCheck, [synonymsDict]);
+
 
     const loadInitialArray = async (sheetName, column) => {
         if (!initialDoc) {
@@ -103,14 +105,12 @@ const WorkplaceContainer = (props) => {
 
     const initialArrayLoadCheck = () => {
         props.setInitialArrayIsLoaded(!!initialArray);
-        console.log("initial arr loading");
     };
 
     useEffect(initialArrayLoadCheck, [initialArray]);
 
     const initialDocLoadCheck = () => {
         props.setInitialDocIsLoaded(!!initialDoc);
-        console.log("initial doc loading");
     };
 
     useEffect(initialDocLoadCheck, [initialDoc]);
@@ -134,11 +134,14 @@ const WorkplaceContainer = (props) => {
                 let initialValues = [initialValue, ...synonyms];
                 let matches = [];
                 initialValues.forEach(value => matches.push(...findBestMatch(value, lookupArray).ratings));
+                matches.sort((a, b) => b.rating - a.rating);
+                matches = matches.map(({target}) => target);
                 let result = {
                     initialValue,
                     synonyms,
-                    number: i + 1,
-                    matches: matches.sort((a, b) => b.rating - a.rating)
+                    rowId: i+1,
+                    matches,
+                    chosenMatch: matches[0],
                 };
 
                 results.push(result);
@@ -146,32 +149,54 @@ const WorkplaceContainer = (props) => {
         } else {
             for (let i = 0; i < initialArray.length; i++) {
                 let initialValue = initialArray[i];
-                console.log('match searching');
                 let matches = findBestMatch(initialValue, lookupArray).ratings;
-                console.log('matches:');
-                console.log(matches);
+                matches.sort((a, b) => b.rating - a.rating);
+                matches = matches.map(({target}) => target);
                 let result = {
                     initialValue,
-                    number: i + 1,
-                    matches: matches.sort((a, b) => b.rating - a.rating)
+                    rowId: i+1,
+                    matches,
+                    chosenMatch: matches[0],
                 };
 
                 results.push(result);
             }
         }
 
-        console.log(results);
+        // console.log(results);
         setLookupResults(results);
     };
 
     const clearResults = () => {
         setLookupResults(null);
-        console.log('clearing');
+    };
+
+    const updateLookupResults = (rowIndex, columnId, value) => {
+        setLookupResults(old =>
+            old.map((row, index) => {
+                if (index === rowIndex) {
+                  return {
+                    ...old[rowIndex],
+                    [columnId]: value,
+                  };
+                }
+                return row;
+            })
+        );
     };
 
     return (
         <div id='workplace-container'>
-            <Workplace {...{loadInitialArray, loadLookupArray, loadSynonymsDict, setInitialDoc, runSeeking, clearResults, lookupResults}}/>
+            <Workplace {...{
+                loadInitialArray,
+                loadLookupArray,
+                loadSynonymsDict,
+                setInitialDoc,
+                runSeeking,
+                clearResults,
+                lookupResults,
+                updateLookupResults,
+            }}/>
         </div>
     );
 };
@@ -189,6 +214,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
 
         setSynonymsArrayIsLoaded: (isLoaded) => {
             dispatch(setSynonymsArrayIsLoaded(isLoaded));
+        },
+
+        setSynonymsDictIsLoaded: (isLoaded) => {
+            dispatch(setSynonymsDictIsLoaded(isLoaded));
         },
 
         setInitialArrayIsLoaded: (isLoaded) => {

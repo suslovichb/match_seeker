@@ -38,6 +38,7 @@ const Settings = ({
     loadInitialArray,
     lookupArrayIsLoaded,
     synonymsArrayIsLoaded,
+    synonymsDictIsLoaded,
     initialDocColumn,
     onInitialDocColumnChange,
     initialDocSheetName,
@@ -47,14 +48,6 @@ const Settings = ({
 }) => {
     return (
         <div id='settings'>
-            {/*<div id="settings-heading" className="panel-heading">*/}
-                {/*<h4 className="panel-title">*/}
-                    {/*<a data-toggle="collapse" href="#collapsable">*/}
-                        {/*Settings*/}
-                    {/*</a>*/}
-                {/*</h4>*/}
-            {/*</div>*/}
-
             <div id="settings-bar" className="navbar navbar-expand-lg navbar-dark bg-dark collapse">
                 <span className="input-group-wrapper">
                     <label htmlFor="initial-doc-input">
@@ -92,7 +85,7 @@ const Settings = ({
                         Load
                     </button>
                     <span>
-                        Array {isLoadedIndicator(initialArrayIsLoaded)}
+                        {isLoadedIndicator(initialArrayIsLoaded)}
                     </span>
                 </span>
 
@@ -143,17 +136,9 @@ const Settings = ({
                     >
                         Load
                     </button>
-
-                    <span>{isLoadedIndicator(lookupArrayIsLoaded)}</span>
-
-                    {/*{*/}
-                        {/*typeof lookupSheetColumns !== 'undefined' &&*/}
-                        {/*lookupSheetColumns.length > 0 &&*/}
-                        {/*<select id="lookup-column-select" className="column-select">*/}
-                            {/*<option disabled>Choose column</option>*/}
-                            {/*{arrayToOptions(lookupSheetColumns)}*/}
-                        {/*</select>*/}
-                    {/*}*/}
+                    <span>
+                        {isLoadedIndicator(lookupArrayIsLoaded)}
+                    </span>
                 </span>
 
                 <span className="input-group-wrapper">
@@ -203,10 +188,9 @@ const Settings = ({
                     >
                         Load
                     </button>
-
-                    {/*<span>{isLoadedIndicator(synonymsDocIsLoaded)}</span>*/}
-                    <span>{isLoadedIndicator(synonymsArrayIsLoaded)}</span>
-
+                    <span>
+                        {isLoadedIndicator(synonymsDictIsLoaded)}
+                    </span>
                 </span>
 
                 <div id='settings-tools'>

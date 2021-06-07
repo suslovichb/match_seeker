@@ -47,6 +47,7 @@ const mapStateToProps = (state, ownProps) => {
         synonymsDocIsLoaded: state.settings.synonymsDocIsLoaded,
         synonymsDocColumn: state.settings.synonymsDocColumn,
         synonymsArrayIsLoaded: state.settings.synonymsArrayIsLoaded,
+        synonymsDictIsLoaded: state.settings.synonymsDictIsLoaded,
 
         initialDocColumn: state.settings.initialDocColumn,
         initialDocSheetName: state.settings.initialDocSheetName,
@@ -57,7 +58,7 @@ const mapStateToProps = (state, ownProps) => {
             event.stopPropagation();
             event.preventDefault();
             getWorkbookFromFile(event.target.files[0]).then(wb => {
-                console.log(wb);
+                // console.log(wb);
                 ownProps.setInitialDoc(wb);
             });
         },

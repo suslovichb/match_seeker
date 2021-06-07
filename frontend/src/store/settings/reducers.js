@@ -13,6 +13,7 @@ import {
     SETTINGS_SET_SYNONYMS_DOC_COLUMN,
     SETTINGS_SET_SYNONYMS_DOC_IS_LOADED,
     SETTINGS_SET_SYNONYMS_ARRAY_IS_LOADED,
+    SETTINGS_SET_SYNONYMS_DICT_IS_LOADED,
     SETTINGS_SET_INITIAL_DOC_SHEET_NAME,
     SETTINGS_SET_INITIAL_DOC_COLUMN,
     SETTINGS_SET_INITIAL_DOC_IS_LOADED,
@@ -35,6 +36,7 @@ const initialState = {
     synonymsDocKey: '',
     synonymsDocIsLoaded: false,
     synonymsArrayIsLoaded: false,
+    synonymsDictIsLoaded: false,
     initialDocColumn: '',
     initialDocSheetName: '',
     initialDocIsLoaded: false,
@@ -70,7 +72,9 @@ export const settingsReducer = (state = initialState, action) => {
         case SETTINGS_SET_SYNONYMS_DOC_IS_LOADED:
             return {...state, synonymsDocIsLoaded: action.payload};
         case SETTINGS_SET_SYNONYMS_ARRAY_IS_LOADED:
-            return {...state, lookupArrayIsLoaded: action.payload};
+            return {...state, synonymsArrayIsLoaded: action.payload};
+        case SETTINGS_SET_SYNONYMS_DICT_IS_LOADED:
+            return {...state, synonymsDictIsLoaded: action.payload};
         case SETTINGS_SET_INITIAL_DOC_SHEET_NAME:
             return {...state, initialDocSheetName: action.payload};
         case SETTINGS_SET_INITIAL_DOC_COLUMN:
