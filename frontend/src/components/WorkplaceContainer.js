@@ -140,7 +140,7 @@ const WorkplaceContainer = (props) => {
                     initialValue,
                     synonyms,
                     rowId: i+1,
-                    matches,
+                    matches: [...new Set(matches)],
                     chosenMatch: matches[0],
                 };
 
@@ -155,7 +155,7 @@ const WorkplaceContainer = (props) => {
                 let result = {
                     initialValue,
                     rowId: i+1,
-                    matches,
+                    matches: [...new Set(matches)],
                     chosenMatch: matches[0],
                 };
 
@@ -169,6 +169,26 @@ const WorkplaceContainer = (props) => {
 
     const clearResults = () => {
         setLookupResults(null);
+    };
+
+    const downloadResults = () => {
+        if (!lookupResults){
+            console.log('lookup results is absent');
+            return;
+        }
+        let resultsToSave = lookupResults.map(result => {
+            return ({
+                id: result.rowId,
+                initial: result.initialValue,
+                match: result.chosenMatch,
+                matches: result.matches.join(" ,"),
+                synonyms: result.synonyms.join(" ,")
+            })
+        });
+        let ws = XLSX.utils.json_to_sheet(resultsToSave);
+        let wb = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, "Results");
+        XLSX.writeFile(wb, "results.xlsx");
     };
 
     const updateLookupResults = (rowIndex, columnId, value) => {
@@ -194,6 +214,7 @@ const WorkplaceContainer = (props) => {
                 setInitialDoc,
                 runSeeking,
                 clearResults,
+                downloadResults,
                 lookupResults,
                 updateLookupResults,
             }}/>

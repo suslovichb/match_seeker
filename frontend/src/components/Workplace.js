@@ -11,13 +11,14 @@ const Workplace = ({
     setInitialDoc,
     runSeeking,
     clearResults,
+    downloadResults,
     lookupResults,
     updateLookupResults
 }) => {
     return (
         <div id='workplace'>
             <SettingsContainer {...{loadInitialArray, loadLookupArray, loadSynonymsDict, setInitialDoc}}/>
-            <Toolbar {...{runSeeking, clearResults}}/>
+            <Toolbar {...{runSeeking, clearResults, downloadResults}}/>
             {
                 lookupResults &&
                 <MatchTable {...{
