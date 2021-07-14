@@ -15,9 +15,9 @@ export const statusbarReducer = (state = initialState, action) => {
         case STATUSBAR_SET_TEXT:
             return {...state, statusbarText: action.payload};
         case STATUSBAR_HIDE:
-            return {...state, isVisible: false};
+            return {...state, statusbarIsVisible: false};
         case STATUSBAR_SHOW:
-            return {...state, isVisible: true};
+            return {...state, statusbarIsVisible: true};
     }
 
     return state;

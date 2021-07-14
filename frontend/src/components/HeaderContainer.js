@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from "react-redux"
 import Header from "./Header";
-import {setIsAuthenticated} from "../store/auth/actions";
+import {handleLogout} from "../store/auth/actions";
 
 
 const mapStateToProps = state => {
@@ -13,7 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onLogoutClick: () => {dispatch(setIsAuthenticated(false))},
+        onLogoutClick: () => {dispatch(handleLogout())},
     };
 };
 

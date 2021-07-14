@@ -14,9 +14,11 @@ import {
     setSynonymsDocColumn,
     setInitialDocSheetName,
     setInitialDocColumn,
+    saveSettings,
+    // loadSettings,
 } from "../store/settings/actions";
 import XLSX from 'xlsx';
-
+import axiosInstance from "../axiosApi";
 
 async function getWorkbookFromFile(excelFile) {
     return new Promise((resolve, reject) => {
@@ -113,7 +115,9 @@ const mapDispatchToProps = (dispatch, ownProps) => {
         onInitialDocColumnChange: (event) => { dispatch(setInitialDocColumn(event.target.value)) },
         onInitialDocSheetNameChange: (event) => { dispatch(setInitialDocSheetName(event.target.value)) },
         loadSettings: () => {console.log('load settings clicked')},
-        saveSettings: () => {console.log('save settings clicked')},
+        // saveSettings: () => {console.log('save settings clicked')},
+        // saveSettings: (event) => {saveSettings(ownProps, dispatch)},
+        saveSettings: () => {dispatch(saveSettings())},
 
     };
 };

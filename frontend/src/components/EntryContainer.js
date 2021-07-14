@@ -2,8 +2,18 @@ import React from 'react';
 import axiosInstance from "../axiosApi";
 import Entry from "./Entry";
 import {connect} from "react-redux";
-import {setIsAuthenticated, setLoginPassword, setLoginUsername} from "../store/auth/actions";
-import {setRegistrationEmail, setRegistrationPassword, setRegistrationUsername} from "../store/registration/actions";
+import {
+    handleLoginSubmit,
+    setIsAuthenticated,
+    setLoginPassword,
+    setLoginUsername
+} from "../store/auth/actions";
+import {
+    setRegistrationEmail,
+    setRegistrationPassword,
+    setRegistrationUsername,
+    handleRegistrationSubmit
+} from "../store/registration/actions";
 
 // const handleLoginSubmit = async (event, props, dispatch) => {
 //     event.preventDefault();
@@ -49,8 +59,14 @@ const mapStateToProps = (state, ownProps) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onRegistrationSubmit: (event) => { event.preventDefault(); },
-        onLoginSubmit: (event) => { event.preventDefault(); },
+        onRegistrationSubmit: (event) => {
+            event.preventDefault();
+            dispatch(handleRegistrationSubmit());
+        },
+        onLoginSubmit: (event) => {
+            event.preventDefault();
+            dispatch(handleLoginSubmit());
+        },
         onLoginUsernameChange: (event) => { dispatch(setLoginUsername(event.target.value)) },
         onLoginPasswordChange: (event) => { dispatch(setLoginPassword(event.target.value)) },
         onRegistrationPasswordChange: (event) => { dispatch(setRegistrationPassword(event.target.value)) },
