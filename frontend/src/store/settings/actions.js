@@ -118,21 +118,36 @@ export const setInitialArrayIsLoaded = isLoaded => ({
     payload: isLoaded
 });
 
-// export const setSettings = settings => {
-//     return dispatch => {
-//         dispatch(setLookupDocId(settings['search_google_spreadsheet_id']));
-//         dispatch(setLookupDocEmail(settings['search_google_spreadsheet_email']));
-//         dispatch(setLookupDocKey(settings['search_google_spreadsheet_key']));
-//         dispatch(setLookupDocSheetId(settings['search_google_spreadsheet_sheet_id']));
-//         dispatch(setLookupDocColumn(settings['search_google_spreadsheet_column']));
-//         dispatch(setSynonymsDocId(settings['synonyms_google_spreadsheet_id']));
-//         dispatch(setSynonymsDocEmail(settings['synonyms_google_spreadsheet_email']));
-//         dispatch(setSynonymsDocKey(settings['synonyms_google_spreadsheet_key']));
-//         dispatch(setSynonymsDocSheetId(settings['synonyms_google_spreadsheet_sheet_id']));
-//         dispatch(setSynonymsDocColumn(settings['synonyms_google_spreadsheet_column']));
-//     }
-// };
+export const setSettings = settings => {
+    return dispatch => {
+        dispatch(setLookupDocId(settings['search_google_spreadsheet_id']));
+        dispatch(setLookupDocEmail(settings['search_google_spreadsheet_email']));
+        dispatch(setLookupDocKey(settings['search_google_spreadsheet_key']));
+        dispatch(setLookupDocSheetId(settings['search_google_spreadsheet_sheet_id']));
+        dispatch(setLookupDocColumn(settings['search_google_spreadsheet_column']));
+        dispatch(setSynonymsDocId(settings['synonyms_google_spreadsheet_id']));
+        dispatch(setSynonymsDocEmail(settings['synonyms_google_spreadsheet_email']));
+        dispatch(setSynonymsDocKey(settings['synonyms_google_spreadsheet_key']));
+        dispatch(setSynonymsDocSheetId(settings['synonyms_google_spreadsheet_sheet_id']));
+        dispatch(setSynonymsDocColumn(settings['synonyms_google_spreadsheet_column']));
+    }
+};
 
+export const loadSettings = () => {
+    return (dispatch, getState) => {
+        const userId = localStorage.getItem('user_id');
+        axiosInstance.get(
+            `/users/${userId}`
+        )
+            .then(response => {
+                console.log(response);
+                dispatch(setSettings(response.data));
+            })
+            .catch(error => {
+                console.log(error);
+            })
+    }
+};
 
 export const saveSettings = settings => {
     return (dispatch, getState) => {
@@ -159,11 +174,3 @@ export const saveSettings = settings => {
             .catch(error => {console.log(error)});
     };
 };
-
-// export const loadSettings = () => {
-//     return dispatch => {
-//         dispatch(setStatusbarText('loading'));
-//         dispatch(showStatusbar());
-//         axiosInstance.get();
-//     };
-// };
