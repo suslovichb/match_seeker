@@ -81,17 +81,17 @@ class CustomUserUpdateSerializer(serializers.ModelSerializer):
     username = serializers.CharField(max_length=150, required=False)
     password = serializers.CharField(min_length=8, write_only=True, required=False)
 
-    search_google_spreadsheet_id = serializers.CharField(max_length=100, required=False)
-    search_google_spreadsheet_email = serializers.CharField(max_length=100, required=False)
-    search_google_spreadsheet_key = serializers.CharField(max_length=1676, required=False)
-    search_google_spreadsheet_sheet_id = serializers.CharField(max_length=100, required=False)
-    search_google_spreadsheet_column = serializers.CharField(max_length=100, required=False)
+    search_google_spreadsheet_id = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    search_google_spreadsheet_email = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    search_google_spreadsheet_key = serializers.CharField(max_length=1676, required=False, allow_blank=True)
+    search_google_spreadsheet_sheet_id = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    search_google_spreadsheet_column = serializers.CharField(max_length=100, required=False, allow_blank=True)
 
-    synonyms_google_spreadsheet_id = serializers.CharField(max_length=100, required=False)
-    synonyms_google_spreadsheet_email = serializers.CharField(max_length=100, required=False)
-    synonyms_google_spreadsheet_key = serializers.CharField(max_length=1676, required=False)
-    synonyms_google_spreadsheet_sheet_id = serializers.CharField(max_length=100, required=False)
-    synonyms_google_spreadsheet_column = serializers.CharField(max_length=100, required=False)
+    synonyms_google_spreadsheet_id = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    synonyms_google_spreadsheet_email = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    synonyms_google_spreadsheet_key = serializers.CharField(max_length=1676, required=False, allow_blank=True)
+    synonyms_google_spreadsheet_sheet_id = serializers.CharField(max_length=100, required=False, allow_blank=True)
+    synonyms_google_spreadsheet_column = serializers.CharField(max_length=100, required=False, allow_blank=True)
 
     class Meta:
         model = CustomUser
