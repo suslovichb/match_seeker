@@ -1,5 +1,6 @@
 import axiosInstance from "../../axiosApi";
 import jwt_decode from "jwt-decode";
+import history from "../../history";
 
 export const AUTH_CHANGE_USERNAME_TEXT = 'AUTH_CHANGE_USERNAME_TEXT';
 export const AUTH_CHANGE_PASSWORD_TEXT = 'AUTH_CHANGE_PASSWORD_TEXT';
@@ -55,6 +56,7 @@ export const handleLoginSubmit = () => {
                 localStorage.setItem('username', jwt_decoded['username']);
                 dispatch(setApprovedUsername(jwt_decoded['username']));
                 dispatch(setIsAuthenticated(true));
+                history.push('/workplace/');
                 return response;
             })
             .catch(error => {
@@ -77,6 +79,8 @@ export const handleLogout = () => {
                 localStorage.removeItem('username');
                 axiosInstance.defaults.headers['Authorization'] = null;
                 dispatch(setIsAuthenticated(false));
+                dispatch(setLoginUsername(''));
+                dispatch(setLoginPassword(''));
                 return response;
             })
             .catch(error => {
